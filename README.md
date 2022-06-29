@@ -3,9 +3,13 @@
 ## Pins-overview
 | Pin | Navn          |
 | --- | ------------- |
-| D8  | Fan-Power     |
 | D5  | Fan-PWM       |
-| D6  | LED-Power/PWM | 
+| D6  | LED-Power/PWM |
+| D8  | Fan-Power     |
+| D9  | Power-Switch  |
+| D10 | RE-SW         |
+| D11 | RE-DT         |
+| D12 | RE-CLK        | 
 
 ![Diagram](./assets/diagram.png)
 
