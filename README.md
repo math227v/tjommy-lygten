@@ -14,6 +14,8 @@ LED-Blå skal styre blæser-hastigheden med et PWM-signal (0 er slukket, 255 er 
 
 LED-Hvid skal styres med (255 er slukket, 0 er tændt).
 
+[Rotary Encoder'en](https://docs.wokwi.com/parts/wokwi-ky-040) skal som udgangspunkt styre lysstyrken på LEDen (PWM). Men ved et klik, skal den skifte til at styre hastigheden på blæseren. Evt. en LED som lyser efter tilstanden?
+
 ## Originale specifikationer
 > Den blå og grønne LED skal forstille blæseren der køler LEDen.
 > 
