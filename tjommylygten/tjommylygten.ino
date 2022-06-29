@@ -21,15 +21,33 @@ void setup() {
   pinMode(ENCODER_CLK, INPUT);
 }
 
+int lastEncoderClk = HIGH;
+
 void loop() {
   // Read all pins
-  int mainSwitch = digitalRead(SWITCH_PIN);
+  int switchState = digitalRead(SWITCH_PIN);
+  int newEncoderClk = digitalRead(ENCODER_CLK);
 
-  // Do maths
-  // Fx calculate blink speed based on rotary encoder, etc.
+  // Handle Encoder rotation
+  if (newEncoderClk != lastEncoderClk) {
+    lastEncoderClk = newEncoderClk;
+    int encoderDtValue = digitalRead(ENCODER_DT);
+
+    if ( newEncoderClk == LOW && encoderDtValue == HIGH ) {
+      // Clockwise rotation
+      // DO SHIT
+      // constrain(x, min, max);
+    }
+    if ( newEncoderClk == LOW && encoderDtValue == LOW ) {
+      // Counterclockwise rotation
+      // DO SHIT
+      // constrain(x, min, max);
+    }
+
+  }
 
   // React on data
-  if ( mainSwitch == HIGH ) {
+  if ( switchState == HIGH ) {
 
   } else {
     analogWrite(LED_CONTROL_PIN, LED_OFF);
