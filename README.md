@@ -15,17 +15,17 @@ LED-Blå skal styre blæser-hastigheden med et PWM-signal (0 er slukket, 255 er 
 LED-Hvid skal styres med (255 er slukket, 0 er tændt).
 
 ## Originale specifikationer
-Den blå og grønne LED skal forstille blæseren der køler LEDen.
-
-Den grønne LED skal være LOW for at tænde blæseren, og den blå skal man bruge PWM for at skifte på blæserens hastighed.
-
-For at tænde 100 watt LED så skal den være LOW og der kan bruges pwm (255 svare til at være helt slukket og 0 svare til at være helt tændt)
-
-### Regler:
-1. Den blå LED (PWM til blæser) må kun køre når den grønne LED (POWER til blæser) er tændt.
-2. Man skal bruge switchen til at tænde og slukke for både blæseren og LEDen.
-3. Når man drejer på Rotary Encoder'en så skruer man på og ned for lysstyrken på LEDen.
-4. Når man trykker på Rotary Encoder'en så skifter man til at styre hastigheden på blæseren.
+> Den blå og grønne LED skal forstille blæseren der køler LEDen.
+> 
+> Den grønne LED skal være LOW for at tænde blæseren, og den blå skal man bruge PWM for at skifte på blæserens hastighed.
+> 
+> For at tænde 100 watt LED så skal den være LOW og der kan bruges pwm (255 svare til at være helt slukket og 0 svare til at være helt tændt)
+> 
+> ### Regler:
+> 1. Den blå LED (PWM til blæser) må kun køre når den grønne LED (POWER til blæser) er tændt.
+> 2. Man skal bruge switchen til at tænde og slukke for både blæseren og LEDen.
+> 3. Når man drejer på Rotary Encoder'en så skruer man på og ned for lysstyrken på LEDen.
+> 4. Når man trykker på Rotary Encoder'en så skifter man til at styre hastigheden på blæseren.
 
 # Wokwi
 [Wokwi](https://wokwi.com/projects/new/arduino-nano)
