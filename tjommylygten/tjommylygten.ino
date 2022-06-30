@@ -1,3 +1,19 @@
+// -------- //
+// SETTINGS // 
+// -------- //
+
+// Fan speed on boot
+// Limit to between 0 and 255
+#define FAN_DEFAULT_SPEED 255
+
+// LED power on boot
+// Percentage between 0% (off) and 100% (on)
+#define LED_POWER_DEFAULT_PERCENTAGE 50
+
+// // // // // // //
+//  Configuration //
+// // // // // // //
+
 #define LED_CONTROL_PIN 6
 #define FAN_POWER_PIN 8
 #define FAN_PWM_PIN 5
@@ -22,6 +38,9 @@ void setup() {
 }
 
 int lastEncoderClk = HIGH;
+
+int fanSpeed = FAN_DEFAULT_SPEED;
+int ledPower = map(LED_POWER_DEFAULT_PERCENTAGE, 0, 100, 255, 0);
 
 void loop() {
   // Read all pins
