@@ -25,13 +25,14 @@
 
 #define LED_OFF 255
 #define FAN_OFF HIGH
+#define FAN_ON LOW
 
 void setup() {
   pinMode(LED_CONTROL_PIN, OUTPUT);
   pinMode(FAN_POWER_PIN, OUTPUT);
   pinMode(FAN_PWM_PIN, OUTPUT);
   pinMode(MODE_LED_PIN, OUTPUT);
-  pinMode(SWITCH_PIN, INPUT);
+  pinMode(SWITCH_PIN, INPUT_PULLUP);
   pinMode(ENCODER_SW, INPUT);
   pinMode(ENCODER_DT, INPUT);
   pinMode(ENCODER_CLK, INPUT);
@@ -67,9 +68,12 @@ void loop() {
 
   // React on data
   if ( switchState == HIGH ) {
-
+    digitalWrite(FAN_POWER_PIN, FAN_ON);
+    analogWrite(FAN_PWM_PIN, fanSpeed);
+    analogWrite(LED_CONTROL_PIN, ledPower);
   } else {
-    analogWrite(LED_CONTROL_PIN, LED_OFF);
     digitalWrite(FAN_POWER_PIN, FAN_OFF);
+    analogWrite(FAN_PWM_PIN, 0);
+    analogWrite(LED_CONTROL_PIN, LED_OFF);
   }
 }
