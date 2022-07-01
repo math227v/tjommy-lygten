@@ -44,8 +44,8 @@ int setLedPercentage( int percentage = 0 ) {
 }
 
 int setFanPercentage( int percentage = 0 ) {
-  int FanPwm = map(percentage, 0, 100, 255, 0);
-  analogWrite(FAN_PWM_PIN, FanPwm);
+  int fanPwm = map(percentage, 0, 100, 0, 255);
+  analogWrite(FAN_PWM_PIN, fanPwm);
 
   if ( percentage <= 0 ) {
     // Off
