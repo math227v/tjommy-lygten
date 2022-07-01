@@ -8,7 +8,7 @@
 
 // LED power on boot
 // Percentage between 0% (off) and 100% (on)
-#define LED_POWER_DEFAULT_PERCENTAGE 50
+#define LED_POWER_DEFAULT 50
 
 // // // // // // //
 //  Configuration //
@@ -38,13 +38,31 @@ void setup() {
   pinMode(ENCODER_CLK, INPUT);
 }
 
+int setLedPercentage( int percentage = 0 ) {
+  int LEDPwm = map(percentage, 0, 100, 255, 0);
+  analogWrite(LED_CONTROL_PIN, LEDPwm);
+}
+
+int setFanPercentage( int percentage = 0 ) {
+  int FanPwm = map(percentage, 0, 100, 255, 0);
+  analogWrite(FAN_PWM_PIN, FanPwm);
+
+  if ( percentage <= 0 ) {
+    // Off
+    digitalWrite(FAN_POWER_PIN, HIGH);
+  } else {
+    // ON
+    digitalWrite(FAN_POWER_PIN, LOW);
+  }
+}
+
 int lastEncoderClk = HIGH;
 
 int fanSpeed = FAN_DEFAULT_SPEED;
-int ledPower = map(LED_POWER_DEFAULT_PERCENTAGE, 0, 100, 255, 0);
+int ledPower = LED_POWER_DEFAULT;
 
 void loop() {
-  // Read all pins
+  // Read input pins
   int switchState = digitalRead(SWITCH_PIN);
   int newEncoderClk = digitalRead(ENCODER_CLK);
 
@@ -63,17 +81,14 @@ void loop() {
       // DO SHIT
       // constrain(x, min, max);
     }
-
   }
 
   // React on data
   if ( switchState == HIGH ) {
-    digitalWrite(FAN_POWER_PIN, FAN_ON);
-    analogWrite(FAN_PWM_PIN, fanSpeed);
-    analogWrite(LED_CONTROL_PIN, ledPower);
+    setLedPercentage(ledPower);
+    setFanPercentage(fanSpeed);
   } else {
-    digitalWrite(FAN_POWER_PIN, FAN_OFF);
-    analogWrite(FAN_PWM_PIN, 0);
-    analogWrite(LED_CONTROL_PIN, LED_OFF);
+    setLedPercentage();
+    setFanPercentage();
   }
 }
