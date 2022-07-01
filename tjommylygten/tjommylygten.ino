@@ -3,8 +3,8 @@
 // -------- //
 
 // Fan speed on boot
-// Limit to between 0 and 255
-#define FAN_DEFAULT_SPEED 255
+// Percentage between 0% (off) and 100% (on)
+#define FAN_DEFAULT_SPEED 100
 
 // LED power on boot
 // Percentage between 0% (off) and 100% (on)
