@@ -10,6 +10,10 @@
 // Percentage between 0% (off) and 100% (on)
 #define LED_POWER_DEFAULT 0
 
+// How big a change does the encoder change the 
+// fan- and LED power levels with
+#define ENCODER_STEP_SIZE 5
+
 // // // // // // //
 //  Configuration //
 // // // // // // //
@@ -80,10 +84,10 @@ void loop() {
     if ( newEncoderClk == LOW && encoderDtValue == HIGH ) {
       // Clockwise rotation
       if ( mode == 1 ) {
-        fanSpeed += 5;
+        fanSpeed += ENCODER_STEP_SIZE;
         fanSpeed = constrain(fanSpeed, 0, 100);
       } else if ( mode == -1 ) {
-        ledPower += 5;
+        ledPower += ENCODER_STEP_SIZE;
         ledPower = constrain(ledPower, 0, 100);
       }
     }
@@ -91,10 +95,10 @@ void loop() {
     if ( newEncoderClk == LOW && encoderDtValue == LOW ) {
       // Counterclockwise rotation
       if ( mode == 1 ) {
-        fanSpeed -= 5;
+        fanSpeed -= ENCODER_STEP_SIZE;
         fanSpeed = constrain(fanSpeed, 0, 100);
       } else if ( mode == -1 ) {
-        ledPower -= 5;
+        ledPower -= ENCODER_STEP_SIZE;
         ledPower = constrain(ledPower, 0, 100);
       }
     }
