@@ -4,11 +4,11 @@
 
 // Fan speed on boot
 // Percentage between 0% (off) and 100% (on)
-#define FAN_DEFAULT_SPEED 100
+#define FAN_DEFAULT_SPEED 0
 
 // LED power on boot
 // Percentage between 0% (off) and 100% (on)
-#define LED_POWER_DEFAULT 50
+#define LED_POWER_DEFAULT 0
 
 // // // // // // //
 //  Configuration //
@@ -33,7 +33,7 @@ void setup() {
   pinMode(FAN_PWM_PIN, OUTPUT);
   pinMode(MODE_LED_PIN, OUTPUT);
   pinMode(SWITCH_PIN, INPUT_PULLUP);
-  pinMode(ENCODER_SW, INPUT);
+  pinMode(ENCODER_SW, INPUT_PULLUP);
   pinMode(ENCODER_DT, INPUT);
   pinMode(ENCODER_CLK, INPUT);
 }
@@ -57,14 +57,20 @@ int setFanPercentage( int percentage = 0 ) {
 }
 
 int lastEncoderClk = HIGH;
+int lastEncoderSwitch = LOW;
 
 int fanSpeed = FAN_DEFAULT_SPEED;
 int ledPower = LED_POWER_DEFAULT;
+
+// Mode  1 = Fan control
+// Mode -1 = LED control
+int mode = 1;
 
 void loop() {
   // Read input pins
   int switchState = digitalRead(SWITCH_PIN);
   int newEncoderClk = digitalRead(ENCODER_CLK);
+  int newEncoderSwitch = digitalRead(ENCODER_SW);
 
   // Handle Encoder rotation
   if (newEncoderClk != lastEncoderClk) {
@@ -73,15 +79,32 @@ void loop() {
 
     if ( newEncoderClk == LOW && encoderDtValue == HIGH ) {
       // Clockwise rotation
-      // DO SHIT
-      // constrain(x, min, max);
+      if ( mode == 1 ) {
+        fanSpeed += 5;
+        fanSpeed = constrain(fanSpeed, 0, 100);
+      } else if ( mode == -1 ) {
+        ledPower += 5;
+        ledPower = constrain(ledPower, 0, 100);
+      }
     }
+
     if ( newEncoderClk == LOW && encoderDtValue == LOW ) {
       // Counterclockwise rotation
-      // DO SHIT
-      // constrain(x, min, max);
+      if ( mode == 1 ) {
+        fanSpeed -= 5;
+        fanSpeed = constrain(fanSpeed, 0, 100);
+      } else if ( mode == -1 ) {
+        ledPower -= 5;
+        ledPower = constrain(ledPower, 0, 100);
+      }
     }
   }
+
+  if ( newEncoderSwitch == HIGH && lastEncoderSwitch == LOW ) {
+    mode *= -1;
+  }
+  
+  lastEncoderSwitch = newEncoderSwitch;
 
   // React on data
   if ( switchState == HIGH ) {
